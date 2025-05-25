@@ -1,0 +1,35 @@
+/* En styleEstatico.css o donde manejes tus estilos */
+.cart-item-count {
+  background-color: red; /* O tu color preferido */
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.75rem;
+  position: absolute;
+  top: -5px; /* Ajusta según el icono */
+  right: -5px; /* Ajusta según el icono */
+  transform: translate(50%, -50%);
+  min-width: 18px; /* Para números de 1 o 2 dígitos */
+  text-align: center;
+  line-height: 1;
+}
+.cartnav {
+  position: relative; /* Necesario para posicionar el contador */
+}
+/* Estilos para los botones de logout y admin/login */
+.btnLogout .link, .btnLogin .link, .btnAdmin .link {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit; /* Heredar fuente del body */
+    font-size: inherit; /* Heredar tamaño de fuente */
+    padding: 0; /* Eliminar padding por defecto de botón */
+    color: white; /* Color de texto como los otros enlaces */
+    text-decoration: none; /* Sin subrayado por defecto */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.btnLogout .link:hover, .btnLogin .link:hover, .btnAdmin .link:hover {
+    text-decoration: underline; /* Subrayado al pasar el mouse */
+}

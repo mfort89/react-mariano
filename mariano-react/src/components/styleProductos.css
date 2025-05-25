@@ -1,0 +1,128 @@
+/* src/components/styleProducto.css */
+
+.card {
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra ligeramente más pronunciada */
+    padding: 20px; /* Más padding para mejor espaciado */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Animación al pasar el ratón */
+    width: 280px; /* Ancho fijo para las tarjetas */
+    margin: 15px; /* Espacio entre tarjetas */
+    border: 1px solid #e0e0e0; /* Borde sutil */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Pequeño levantamiento al pasar el ratón */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.imganContainer {
+    width: 100%;
+    height: 180px;
+    background-color: #f8f8f8; /* Un fondo más claro para el contenedor de imagen */
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Sombra interna para profundidad */
+}
+
+.imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 'contain' para que la imagen se ajuste sin cortarse */
+    padding: 10px; /* Pequeño padding dentro del contenedor de imagen */
+}
+
+.nombre {
+    font-size: 20px; /* Tamaño de fuente ligeramente más grande */
+    font-weight: 700; /* Más negrita */
+    color: #2c3e50; /* Un gris oscuro más profundo */
+    margin-bottom: 8px;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.precio {
+    font-size: 18px;
+    font-weight: 800; /* Aún más negrita */
+    color: #3498db; /* Un azul más vibrante */
+    margin-bottom: 8px;
+}
+
+.stock {
+    font-size: 14px;
+    color: #7f8c8d; /* Un gris medio */
+    margin-bottom: 16px;
+}
+
+.cantidadContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Más espacio entre los botones de cantidad */
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 5px 10px;
+}
+
+.qtyButton {
+    background-color: #e9ecef;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.1s;
+    color: #333;
+}
+
+.qtyButton:hover:not(:disabled) {
+    background-color: #cfd4d9;
+    transform: translateY(-1px);
+}
+
+.qtyButton:disabled {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+    color: #aaa;
+}
+
+.qtyDisplay {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    min-width: 25px; /* Asegura un ancho mínimo */
+    text-align: center;
+}
+
+.addToCartButton {
+    background-color: #28a745; /* Un verde más agradable */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    width: 100%; /* Ocupa todo el ancho disponible en la tarjeta */
+    margin-top: 10px; /* Espacio superior */
+}
+
+.addToCartButton:hover:not(:disabled) {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.addToCartButton:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    color: #666666;
+}
