@@ -1,8 +1,5 @@
-// src/pages/GaleriaDeProductos.jsx - CÓDIGO LIMPIO Y CORREGIDO
 import React, { useContext } from "react";
-// ¡Ya no necesitas importar Header y Footer aquí!
-// import Header from "../components/estaticos/Header.jsx";
-// import Footer from "../components/estaticos/Footer.jsx";
+
 
 // Importación de ProductList
 import ProductList from "../components/ProductList.jsx";
@@ -10,12 +7,12 @@ import ProductList from "../components/ProductList.jsx";
 // Importación de CartContext
 import { CartContext } from "../context/CartContext.jsx";
 
-// Recuerda importar 'loading' si lo usas, que no estaba en tu código original pero sí en Home.jsx
-import loading from '../assets/loading.gif'; // Asegúrate de que esta ruta sea correcta para tu proyecto
+
+import loading from '../assets/loading.gif'; 
 
 
 const GaleriaDeProductos = () => {
-  // Obtén todo lo necesario del contexto
+
   const { productos, cargando, error, agregarCarrito } = useContext(CartContext); // Asegúrate de obtener agregarCarrito si lo necesitas
 
   return (

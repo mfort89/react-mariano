@@ -1,4 +1,4 @@
-// src/components/FormularioProducto.jsx
+
 import React, { useState } from 'react';
 
 function FormularioProducto({ onAgregar }) {

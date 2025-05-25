@@ -1,8 +1,5 @@
-// src/pages/AcercaDe.jsx - CÓDIGO LIMPIO Y CORREGIDO
 import React from "react";
-// ¡Ya no necesitas importar Header y Footer aquí!
-// import Header from "../components/estaticos/Header.jsx";
-// import Footer from "../components/estaticos/Footer.jsx";
+
 
 const AcercaDe = () => {
   return (

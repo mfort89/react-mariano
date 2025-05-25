@@ -1,8 +1,8 @@
-// src/components/DetallesProductos.js
-import React, { useContext } from 'react'; // Asegúrate de importar useContext
+
+import React, { useContext } from 'react'; 
 import { useParams } from 'react-router-dom';
-import { CartContext } from '../context/CartContext'; // Importa el contexto del carrito
-import './styleProductos.css'; // Podemos reutilizar los estilos de producto si aplicable o crear uno nuevo
+import { CartContext } from '../context/CartContext'; 
+import './styleProductos.css'; 
 
 const DetallesProductos = () => {
     // Extrae el ID del producto de la URL

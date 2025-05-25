@@ -1,18 +1,17 @@
-// src/pages/Admin.jsx
 import React, { useState, useEffect } from "react";
-import FormularioProducto from "../components/FormularioProductos.jsx"; // Asegúrate de la extensión .jsx aquí
+import FormularioProducto from "../components/FormularioProductos.jsx";
 
 const Admin = () => {
     const [productos, setProductos] = useState([]);
-    const [users, setUsers] = useState([]); // Nuevo estado para los usuarios
-    const [form, setForm] = useState({ id: null, name: "", price: "" }); // Este 'form' parece no usarse, considera eliminarlo si no lo necesitas
+    const [users, setUsers] = useState([]);
+    const [form, setForm] = useState({ id: null, name: "", price: "" });
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false); // Asegúrate de tener este estado para el error
+    const [error, setError] = useState(false);
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
         // Cargar productos
-        fetch("/data/data.json") // Ruta correcta para data.json en public/data/
+        fetch("/data/data.json")
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);

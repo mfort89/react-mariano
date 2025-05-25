@@ -1,100 +1,97 @@
-/* src/components/estaticos/styleEstaticos.css */
 
 /* --- Estilos Generales del Encabezado (Header) --- */
 header {
-    background-color: #2c3e50; /* Un color oscuro para el fondo */
-    padding: 1rem 0; /* Espaciado vertical interno */
-    color: white; /* Color del texto por defecto */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+    background-color: #2c3e50; 
+    padding: 1rem 0; 
+    color: white; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
 }
 
 /* --- Contenedor de Navegación (nav) --- */
 /* Si tu nav necesita un ancho máximo o centrarse, puedes añadir: */
 nav {
-    max-width: 1200px; /* Ancho máximo para el contenido de la nav */
-    margin: 0 auto; /* Centrar la nav en la página */
-    padding: 0 1rem; /* Espaciado horizontal para los lados */
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 1rem; 
 }
 
 /* --- Lista de Navegación (ul) --- */
 nav ul {
-    list-style: none; /* Quita los puntos/viñetas de la lista */
-    margin: 0;
+    list-style: none; 
     padding: 0;
-    display: flex; /* ¡ESTO ES CRUCIAL! Convierte la lista en un contenedor flex */
-    flex-wrap: wrap; /* Permite que los elementos pasen a la siguiente línea en pantallas pequeñas */
-    justify-content: space-between; /* Distribuye los elementos: inicio y fin, con espacio en el medio */
-    align-items: center; /* Alinea los elementos verticalmente en el centro */
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+    align-items: center; 
 }
 
 /* --- Elementos de la Lista (li) --- */
 nav ul li {
-    margin: 0 10px; /* Espaciado horizontal entre los elementos */
-    position: relative; /* Necesario para posicionar el contador del carrito */
+    position: relative; 
 }
 
-/* --- Estilos para los Enlaces de Navegación (.link) --- */
+
 .link {
-    color: white; /* Color del texto de los enlaces */
-    text-decoration: none; /* Quita el subrayado */
-    padding: 0.8rem 1.2rem; /* Espaciado interno de los enlaces */
-    display: block; /* Para que el padding y el área de clic sean efectivos */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave para hover */
-    border-radius: 5px; /* Bordes ligeramente redondeados */
-    font-weight: 500; /* Grosor de la fuente */
+    color: white; 
+    text-decoration: none; 
+    padding: 0.8rem 1.2rem; 
+    display: block; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
+    border-radius: 5px; 
+    font-weight: 500; 
 }
 
 .link:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Fondo sutil al pasar el ratón */
-    color: #e0f2f7; /* Color de texto más claro al pasar el ratón */
+    background-color: rgba(255, 255, 255, 0.1); 
+    color: #e0f2f7; 
 }
 
 /* --- Estilos del Botón del Carrito (.btnCart) --- */
 .cartnav {
-    display: flex; /* Para alinear el botón y el contador */
+    display: flex; 
     align-items: center;
 }
 
 .btnCart {
-    background: none; /* Sin fondo */
-    border: none; /* Sin borde */
-    color: white; /* Color del icono */
-    font-size: 1.8rem; /* Tamaño del icono */
+    background: none; 
+    border: none; 
+    color: white; 
+    font-size: 1.8rem; 
     cursor: pointer;
     padding: 0.5rem;
-    position: relative; /* Para el posicionamiento absoluto del contador */
+    position: relative; 
     transition: color 0.3s ease;
 }
 
 .btnCart:hover {
-    color: #a7d9f2; /* Color más claro al pasar el ratón */
+    color: #a7d9f2;
 }
 
 /* --- Contador de Ítems del Carrito (.cart-item-count) --- */
 .cart-item-count {
-    background-color: #e74c3c; /* Fondo rojo llamativo */
+    background-color: #e74c3c; 
     color: white;
-    border-radius: 50%; /* Circular */
-    padding: 2px 6px; /* Espaciado interno */
-    font-size: 0.75rem; /* Tamaño de fuente pequeño */
-    position: absolute; /* Posicionamiento absoluto */
-    top: -5px; /* Ajuste vertical */
-    right: -5px; /* Ajuste horizontal */
-    line-height: 1; /* Para que el texto se alinee bien verticalmente */
-    min-width: 18px; /* Para que números como "10" se vean bien */
+    border-radius: 50%; 
+    padding: 2px 6px; 
+    font-size: 0.75rem; 
+    position: absolute; 
+    top: -5px; 
+    right: -5px; 
+    line-height: 1; 
+    min-width: 18px; 
     text-align: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Pequeña sombra */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); 
 }
 
 /* --- Estilos para Botones de Login/Admin/Logout (para diferenciarlos si se desea) --- */
 .btnLogin .link,
 .btnAdmin .link,
-.btnLogout .link button { /* Asegúrate de que el selector sea correcto si es un button */
-    background-color: #3498db; /* Un color distintivo para estos botones */
+.btnLogout .link button { 
+    background-color: #3498db; 
     color: white;
     padding: 0.8rem 1.5rem;
     border-radius: 5px;
-    border: none; /* Quita el borde si es un botón */
+    border: none; 
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -107,5 +104,5 @@ nav ul li {
 
 /* Estilo para los iconos de Font Awesome */
 .fa-solid {
-    margin-right: 5px; /* Pequeño espacio a la derecha del icono */
+    margin-right: 5px; 
 }

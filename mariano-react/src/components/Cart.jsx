@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import './styleCart.css';
-import { CartContext } from '../context/CartContext'; // Asegúrate de que la ruta sea correcta
+import { CartContext } from '../context/CartContext'; 
 
 const Cart = ({ isOpen, onClose }) => {
   // Extrae las funciones y el estado del carrito del contexto

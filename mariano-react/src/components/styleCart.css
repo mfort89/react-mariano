@@ -1,21 +1,20 @@
-/* src/styleCart.css */
 
 .cart-drawer {
     position: fixed;
     top: 0;
-    right: -350px; /* Oculto por defecto */
+    right: -350px; 
     width: 350px;
     height: 100%;
     background-color: white;
     box-shadow: -2px 0 5px rgba(0,0,0,0.2);
     transition: right 0.3s ease-in-out;
-    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    z-index: 1000; 
     display: flex;
     flex-direction: column;
 }
 
 .cart-drawer.open {
-    right: 0; /* Visible cuando está abierto */
+    right: 0; 
 }
 
 .cart-header {
@@ -35,9 +34,9 @@
 }
 
 .cart-content {
-    flex-grow: 1; /* Permite que el contenido del carrito ocupe el espacio restante */
+    flex-grow: 1; 
     padding: 15px;
-    overflow-y: auto; /* Para scroll si hay muchos ítems */
+    overflow-y: auto; 
 }
 
 .cart-items-list {
@@ -55,7 +54,7 @@
 }
 
 .cart-item:last-child {
-    border-bottom: none; /* No border for the last item */
+    border-bottom: none; 
 }
 
 .item-details {

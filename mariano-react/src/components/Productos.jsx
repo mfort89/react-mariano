@@ -1,7 +1,7 @@
-// src/components/Productos.jsx
+
 import React from 'react';
-import { Link } from 'react-router-dom'; // <--- ¡IMPORTA LINK AQUÍ!
-import './styleProductos.css'; // Asegúrate de que esta ruta sea correcta
+import { Link } from 'react-router-dom'; 
+import './styleProductos.css'; 
 
 const Productos = ({ producto, agregarCarrito }) => {
   return (
