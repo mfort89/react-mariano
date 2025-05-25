@@ -1,16 +1,16 @@
-// src/pages/AcercaDe.jsx
+// src/pages/AcercaDe.jsx - CÓDIGO LIMPIO Y CORREGIDO
 import React from "react";
-// Importaciones de Header y Footer
-import Header from "../components/estaticos/Header.jsx"; // <-- ¡Ruta corregida y .jsx!
-import Footer from "../components/estaticos/Footer.jsx"; // <-- ¡Ruta corregida y .jsx!
+// ¡Ya no necesitas importar Header y Footer aquí!
+// import Header from "../components/estaticos/Header.jsx";
+// import Footer from "../components/estaticos/Footer.jsx";
 
 const AcercaDe = () => {
-  // Las props 'cart' y 'borrarProducto' ya no son necesarias aquí,
-  // el Header obtiene lo que necesita directamente del contexto.
   return (
     <>
-      <Header />
-      <main className="container mx-auto px-4 py-8 text-center min-h-[50vh]"> {/* Contenedor para el contenido principal */}
+      {/* ¡ELIMINA EL HEADER DE AQUÍ! */}
+      {/* <Header /> */}
+
+      <main className="container mx-auto px-4 py-8 text-center min-h-[50vh]">
         <h1 style={{ fontSize: '2.5rem', color: '#333', marginBottom: '30px' }}>
           Acerca de Nuestra Tienda
         </h1>
@@ -24,7 +24,9 @@ const AcercaDe = () => {
           ¡Gracias por elegirnos como tu destino tecnológico!
         </p>
       </main>
-      <Footer />
+
+      {/* ¡ELIMINA EL FOOTER DE AQUÍ! */}
+      {/* <Footer /> */}
     </>
   );
 };

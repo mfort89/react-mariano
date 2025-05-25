@@ -1,18 +1,13 @@
-
 import React, { useContext } from "react";
-import Header from "../components/estaticos/Header.jsx";
-import Footer from "../components/estaticos/Footer.jsx";
-import ProductList from '../components/ProductList.jsx'; // Importación corregida a default export
+import ProductList from '../components/ProductList.jsx';
 import loading from '../assets/loading.gif';
-import { CartContext } from '../context/CartContext';
+import { CartContext } from '../context/CartContext'; 
 
 const Home = () => {
-  // Obtén 'productos', 'cargando', 'error' Y 'agregarCarrito' del CartContext
   const { productos, cargando, error, agregarCarrito } = useContext(CartContext);
 
   return (
     <>
-      <Header />
       <main className="container mx-auto px-4 py-8">
         <h1 style={{ textAlign: 'center', fontSize: '3rem', color: '#2c3e50', marginBottom: '20px' }}>
           ¡Bienvenidos a nuestra Tienda de Electrónica!
@@ -26,7 +21,6 @@ const Home = () => {
           Nuestros Productos Destacados
         </h2>
 
-        {/* Manejo de estados: Cargando, Error, Productos */}
         {cargando ? (
           <div style={{ textAlign: 'center', marginTop: '50px' }}>
             <img src={loading} alt='Cargando productos...' style={{ maxWidth: '100px' }} />
@@ -37,11 +31,9 @@ const Home = () => {
             Error al cargar los productos: {error}
           </p>
         ) : (
-          // ¡Pasa las props 'productos' y 'agregarCarrito' a ProductList!
           <ProductList productos={productos} agregarCarrito={agregarCarrito} />
         )}
       </main>
-      <Footer />
     </>
   );
 };

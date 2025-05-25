@@ -1,26 +1,28 @@
-// src/pages/GaleriaDeProductos.jsx
+// src/pages/GaleriaDeProductos.jsx - CÓDIGO LIMPIO Y CORREGIDO
 import React, { useContext } from "react";
-// Importaciones de Header y Footer
-import Header from "../components/estaticos/Header.jsx"; // <-- ¡Ruta corregida y .jsx!
-import Footer from "../components/estaticos/Footer.jsx"; // <-- ¡Ruta corregida y .jsx!
+// ¡Ya no necesitas importar Header y Footer aquí!
+// import Header from "../components/estaticos/Header.jsx";
+// import Footer from "../components/estaticos/Footer.jsx";
 
 // Importación de ProductList
-import ProductList from "../components/ProductList.jsx"; // <-- ¡Asegúrate de la extensión .jsx!
+import ProductList from "../components/ProductList.jsx";
 
-// Importación de CartContext (ya deberías tenerlo bien, pero lo incluyo por si acaso)
+// Importación de CartContext
 import { CartContext } from "../context/CartContext.jsx";
 
+// Recuerda importar 'loading' si lo usas, que no estaba en tu código original pero sí en Home.jsx
+import loading from '../assets/loading.gif'; // Asegúrate de que esta ruta sea correcta para tu proyecto
 
-// ... (resto de tu código de GaleriaDeProductos.jsx)!
 
 const GaleriaDeProductos = () => {
   // Obtén todo lo necesario del contexto
-  const { productos, cargando, error } = useContext(CartContext);
+  const { productos, cargando, error, agregarCarrito } = useContext(CartContext); // Asegúrate de obtener agregarCarrito si lo necesitas
 
   return (
     <>
-      {/* Header y Footer se renderizan aquí y obtienen su info del contexto */}
-      <Header />
+      {/* ¡ELIMINA EL HEADER DE AQUÍ! */}
+      {/* <Header /> */}
+
       <main className="container mx-auto px-4 py-8"> {/* Contenedor principal de la galería */}
         <h1 style={{ textAlign: 'center', fontSize: '2.5rem', color: '#333', marginBottom: '30px' }}>
           Nuestra Galería de Productos
@@ -37,11 +39,14 @@ const GaleriaDeProductos = () => {
             Error al cargar los productos: {error}
           </p>
         ) : (
-          // ProductList ya no necesita props, las obtiene del contexto
-          <ProductList />
+          // Asegúrate de pasar las props 'productos' y 'agregarCarrito' a ProductList
+          // tal como lo hiciste en Home.jsx
+          <ProductList productos={productos} agregarCarrito={agregarCarrito} />
         )}
       </main>
-      <Footer />
+
+      {/* ¡ELIMINA EL FOOTER DE AQUÍ! */}
+      {/* <Footer /> */}
     </>
   );
 };

@@ -4,7 +4,7 @@
     "nombre": "Smartphone Galaxy X",
     "precio": 899.99,
     "stock": 50,
-    "imagen": "https://images.unsplash.com/photo-1601004944885-3b02d84c6c19?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "imagen": "https://picsum.photos/id/237/400/300",
     "categoria": "smartphones",
     "cantidad": 0 
   },
@@ -13,7 +13,7 @@
     "nombre": "Laptop UltraBook Pro",
     "precio": 1299.00,
     "stock": 30,
-    "imagen": "https://images.unsplash.com/photo-1517336714730-496883edbc34?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "imagen": "https://picsum.photos/id/238/400/300",
     "categoria": "computadoras",
     "cantidad": 0
   },
@@ -22,7 +22,7 @@
     "nombre": "Auriculares Inalámbricos SoundBass",
     "precio": 149.99,
     "stock": 75,
-    "imagen": "https://images.unsplash.com/photo-1505740420928-5e560c06f2e0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "imagen": "https://picsum.photos/id/239/400/300",
     "categoria": "audio",
     "cantidad": 0
   },
@@ -31,7 +31,7 @@
     "nombre": "Smartwatch FitPulse",
     "precio": 199.95,
     "stock": 40,
-    "imagen": "https://images.unsplash.com/photo-1547942738-9584285e68b3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "imagen": "https://picsum.photos/id/240/400/300",
     "categoria": "wearables",
     "cantidad": 0
   },
@@ -40,7 +40,7 @@
     "nombre": "Cámara Digital Pro 4K",
     "precio": 599.00,
     "stock": 20,
-    "imagen": "https://images.unsplash.com/photo-1517336714730-496883edbc34?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "imagen": "https://picsum.photos/id/241/400/300",
     "categoria": "fotografía",
     "cantidad": 0
   },
@@ -49,7 +49,7 @@
     "nombre": "Tablet TabPro 10",
     "precio": 349.50,
     "stock": 35,
-    "imagen": "https://images.unsplash.com/photo-1561154464-964082269c5e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "imagen": "https://picsum.photos/id/242/400/300",
     "categoria": "tablets",
     "cantidad": 0
   }

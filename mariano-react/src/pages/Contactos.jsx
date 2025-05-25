@@ -1,15 +1,16 @@
+// src/pages/Contactos.jsx - CÓDIGO LIMPIO Y CORREGIDO
 import React from "react";
-// Importaciones de Header y Footer
-import Header from "../components/estaticos/Header.jsx"; // <-- ¡Ruta corregida y .jsx!
-import Footer from "../components/estaticos/Footer.jsx"; // <-- ¡Ruta corregida y .jsx!
+// ¡Ya no necesitas importar Header y Footer aquí!
+// import Header from "../components/estaticos/Header.jsx";
+// import Footer from "../components/estaticos/Footer.jsx";
 
 const Contactos = () => {
-  // Ya no se necesitan props como cart o borrarProducto,
-  // el Header y cualquier otra parte que los necesite los obtiene del contexto.
   return (
     <>
-      <Header />
-      <main className="container mx-auto px-4 py-8 text-center min-h-[50vh]"> {/* Contenedor para el contenido principal */}
+      {/* ¡ELIMINA EL HEADER DE AQUÍ! */}
+      {/* <Header /> */}
+
+      <main className="container mx-auto px-4 py-8 text-center min-h-[50vh]">
         <h1 style={{ fontSize: '2.5rem', color: '#333', marginBottom: '30px' }}>
           ¡Contáctanos!
         </h1>
@@ -22,8 +23,19 @@ const Contactos = () => {
           <p style={{ fontSize: '1.1rem', color: '#333', fontWeight: 'bold' }}>Dirección: Calle Falsa 123, Ciudad de Ejemplo, País</p>
         </div>
         {/* Aquí podrías agregar un formulario de contacto si lo deseas */}
+        {/* Un formulario de contacto sería la forma ideal de que los usuarios interactúen aquí */}
+        {/*
+        <form style={{ marginTop: '40px', display: 'flex', flexDirection: 'column', gap: '15px', maxWidth: '500px', margin: '40px auto 0' }}>
+            <input type="text" placeholder="Tu Nombre" style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ddd' }} />
+            <input type="email" placeholder="Tu Email" style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ddd' }} />
+            <textarea placeholder="Tu Mensaje" rows="5" style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ddd' }}></textarea>
+            <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#28a745', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '1rem' }}>Enviar Mensaje</button>
+        </form>
+        */}
       </main>
-      <Footer />
+
+      {/* ¡ELIMINA EL FOOTER DE AQUÍ! */}
+      {/* <Footer /> */}
     </>
   );
 };

@@ -7,9 +7,7 @@ import Cart from "../Cart.jsx";
 
 // El Header ahora recibe props para controlar el carrito y el logout
 const Header = ({ countItems, toggleCart, isAuthenticated, userRole, handleLogout }) => {
-  // Ya no necesitas desestructurar todos estos del contexto aquí.
-  // Solo necesitas 'cart' para el conteo si no lo pasas como 'countItems'.
-  // Las demás props (isAuthenticated, userRole, handleLogout) ya las recibes.
+  
   const { cart } = useContext(CartContext); // Solo para el conteo si no viene en props
 
   // Si countItems viene como prop, úsalo. Si no, calcula del contexto.

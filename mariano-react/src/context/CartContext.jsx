@@ -5,23 +5,19 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState(() => {
-        // Inicializa el carrito desde localStorage si existe
         const savedCart = localStorage.getItem('cart');
         return savedCart ? JSON.parse(savedCart) : [];
     });
     const [productos, setProductos] = useState([]);
     const [cargando, setCargando] = useState(true);
-    const [error, setError] = useState(null); // Usar null para indicar ausencia de error
+    const [error, setError] = useState(null);
 
-    // Estado para la autenticación y el rol del usuario
     const [isAuthenticated, setIsAuthenticated] = useState(() => {
-        // Inicializa el estado de autenticación desde localStorage
         const savedAuth = localStorage.getItem('isAuthenticated');
-        return savedAuth === 'true'; // Convertir string a boolean
+        return savedAuth === 'true';
     });
     const [userRole, setUserRole] = useState(() => {
-        // Inicializa el rol del usuario desde localStorage
-        return localStorage.getItem('userRole') || null; // 'null' si no hay rol guardado
+        return localStorage.getItem('userRole') || null;
     });
 
     // Efecto para cargar productos
@@ -33,80 +29,73 @@ export const CartProvider = ({ children }) => {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                // Simula un tiempo de carga para ver el spinner
+                // Simula un tiempo de carga
                 setTimeout(() => {
                     setProductos(data);
                     setCargando(false);
-                }, 1000); // Reducido a 1 segundo para pruebas
+                }, 1000);
             } catch (err) {
                 console.error('Error fetching data:', err);
-                setError(err.message); // Guarda el mensaje de error
+                setError(err.message);
                 setCargando(false);
             }
         };
         fetchProducts();
     }, []);
 
-    // Efecto para persistir el carrito en localStorage cada vez que cambia
+    // Efecto para persistir el carrito en localStorage
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]);
 
-    // Efecto para persistir la autenticación y el rol en localStorage
+    // Efecto para persistir la autenticación y el rol
     useEffect(() => {
         localStorage.setItem('isAuthenticated', isAuthenticated);
-        localStorage.setItem('userRole', userRole || ''); // Guardar rol o string vacío si es null
+        localStorage.setItem('userRole', userRole || '');
     }, [isAuthenticated, userRole]);
 
-
-    const handleAddToCart = (product, quantity = 1) => { // Asegúrate de que quantity sea un número
+    // RENOMBRAMOS a agregarCarrito y aseguramos la propiedad 'quantity'
+    const agregarCarrito = (productToAdd) => { 
         setCart(prevCart => {
-            const productInCart = prevCart.find((item) => item.id === product.id);
+            const productInCart = prevCart.find((item) => item.id === productToAdd.id);
             if (productInCart) {
                 return prevCart.map((item) =>
-                    item.id === product.id
-                        ? { ...item, cantidad: item.cantidad + quantity } // Suma la nueva cantidad
+                    item.id === productToAdd.id
+                        ? { ...item, quantity: item.quantity + productToAdd.quantity } // Suma la cantidad existente con la nueva cantidad
                         : item
                 );
             } else {
-                return [...prevCart, { ...product, cantidad: quantity }]; // Añade con la cantidad especificada
+                return [...prevCart, { ...productToAdd, quantity: productToAdd.quantity }]; // Añade con la cantidad especificada
             }
         });
     };
 
-    const handleDeleteFromCart = (productToDelete) => {
+    // Función para decrementar cantidad de un producto o eliminarlo si llega a 0
+    const restarCantidad = (productId) => {
         setCart(prevCart => {
-            return prevCart.map(item => {
-                if (item.id === productToDelete.id) {
-                    if (item.cantidad > 1) {
-                        return { ...item, cantidad: item.cantidad - 1 };
-                    } else {
-                        // Si la cantidad es 1, se elimina completamente del carrito
-                        return null;
-                    }
+            const updatedCart = prevCart.map(item => {
+                if (item.id === productId) {
+                    return { ...item, quantity: item.quantity - 1 };
                 }
                 return item;
-            }).filter(item => item !== null); // Filtra los elementos marcados para eliminación
+            });
+            // Filtra los productos con quantity <= 0 para eliminarlos del carrito
+            return updatedCart.filter(item => item.quantity > 0);
         });
     };
 
-    const handleRemoveAllFromCart = (productId) => {
+    // Función para eliminar un producto completamente del carrito
+    const eliminarProducto = (productId) => {
         setCart(prevCart => prevCart.filter(item => item.id !== productId));
     };
 
+    // Función para vaciar completamente el carrito
+    const vaciarCarrito = () => {
+        setCart([]);
+    };
 
     // Funciones para la autenticación
     const handleLogin = (email, password) => {
-        // En un caso real, aquí harías una petición a tu backend
-        // Para este proyecto de frontend, usaremos un archivo JSON local.
-        // Asegúrate de que 'public/data/users.json' exista y tenga estos datos
-        // Ejemplo de data/users.json:
-        /*
-        [
-            { "email": "user@example.com", "password": "password123", "role": "user" },
-            { "email": "admin@example.com", "password": "admin123", "role": "admin" }
-        ]
-        */
         return fetch('/data/users.json')
             .then(response => response.json())
             .then(users => {
@@ -117,31 +106,29 @@ export const CartProvider = ({ children }) => {
                 if (foundUser) {
                     setIsAuthenticated(true);
                     setUserRole(foundUser.role);
-                    return true; // Login exitoso
+                    return true;
                 } else {
                     setIsAuthenticated(false);
                     setUserRole(null);
-                    return false; // Login fallido
+                    return false;
                 }
             })
             .catch(err => {
                 console.error("Error during login fetch:", err);
                 setIsAuthenticated(false);
                 setUserRole(null);
-                return false; // Error en la petición
+                return false;
             });
     };
 
     const handleLogout = () => {
         setIsAuthenticated(false);
         setUserRole(null);
-        // localStorage se limpia automáticamente por el useEffect
     };
 
-    // Función para agregar un nuevo producto (solo al estado del frontend)
     const handleAddProduct = (newProduct) => {
-        setProductos(prevProducts => [...prevProducts, { ...newProduct, id: Date.now().toString() }]); // Asigna un ID simple
-        alert('Producto agregado (solo en el frontend).'); // Notificación para el usuario
+        setProductos(prevProducts => [...prevProducts, { ...newProduct, id: Date.now().toString() }]);
+        alert('Producto agregado (solo en el frontend).');
     };
 
     return (
@@ -151,14 +138,15 @@ export const CartProvider = ({ children }) => {
                 productos,
                 cargando,
                 error,
-                handleAddToCart,
-                handleDeleteFromCart,
-                handleRemoveAllFromCart, // Añadido para eliminar completamente
+                agregarCarrito,     // Renombrado y ajustada lógica
+                restarCantidad,     // Nueva función para restar
+                eliminarProducto,   // Nueva función para eliminar completamente
+                vaciarCarrito,      // Nueva función para vaciar
                 isAuthenticated,
-                userRole, // Exponer el rol del usuario
+                userRole,
                 handleLogin,
                 handleLogout,
-                handleAddProduct // Exponer función para añadir producto
+                handleAddProduct
             }}
         >
             {children}
