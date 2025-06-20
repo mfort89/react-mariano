@@ -54,24 +54,24 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem('userRole', userRole || '');
     }, [isAuthenticated, userRole]);
 
-    // RENOMBRAMOS a agregarCarrito y aseguramos la propiedad 'quantity'
+    // Función para agregar un producto al carrito o incrementar su cantidad
     const agregarCarrito = (productToAdd) => { 
         setCart(prevCart => {
             const productInCart = prevCart.find((item) => item.id === productToAdd.id);
             if (productInCart) {
                 return prevCart.map((item) =>
                     item.id === productToAdd.id
-                        ? { ...item, quantity: item.quantity + productToAdd.quantity } // Suma la cantidad existente con la nueva cantidad
+                        ? { ...item, quantity: item.quantity + productToAdd.quantity }
                         : item
                 );
             } else {
-                return [...prevCart, { ...productToAdd, quantity: productToAdd.quantity }]; // Añade con la cantidad especificada
+                return [...prevCart, { ...productToAdd, quantity: productToAdd.quantity }];
             }
         });
     };
 
-    // Función para decrementar cantidad de un producto o eliminarlo si llega a 0
-    const restarCantidad = (productId) => {
+    // Función para decrementar cantidad de un producto
+    const decrementarCantidad = (productId) => { // Renombrado a decrementarCantidad
         setCart(prevCart => {
             const updatedCart = prevCart.map(item => {
                 if (item.id === productId) {
@@ -79,8 +79,7 @@ export const CartProvider = ({ children }) => {
                 }
                 return item;
             });
-            // Filtra los productos con quantity <= 0 para eliminarlos del carrito
-            return updatedCart.filter(item => item.quantity > 0);
+            return updatedCart.filter(item => item.quantity > 0); // Elimina si la cantidad llega a 0
         });
     };
 
@@ -138,10 +137,10 @@ export const CartProvider = ({ children }) => {
                 productos,
                 cargando,
                 error,
-                agregarCarrito,     // Renombrado y ajustada lógica
-                restarCantidad,     // Nueva función para restar
-                eliminarProducto,   // Nueva función para eliminar completamente
-                vaciarCarrito,      // Nueva función para vaciar
+                agregarCarrito,      // Nombre consistente
+                decrementarCantidad, // Nombre consistente
+                eliminarProducto,    // Nombre consistente
+                vaciarCarrito,
                 isAuthenticated,
                 userRole,
                 handleLogin,

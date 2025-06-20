@@ -1,124 +1,141 @@
-.product-detail-container {
+/* src/components/styleProductos.css */
+
+/* Contenedor principal de la grilla de productos */
+.product-grid-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 70vh; 
-    padding: 40px 20px;
-    background-color: #f5f5f5; 
+    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan a la siguiente línea */
+    justify-content: center; /* Centra las tarjetas horizontalmente */
+    gap: 30px; /* Espacio uniforme entre las tarjetas */
+    padding: 20px; /* Espaciado alrededor de la grilla */
 }
 
-.product-detail-card {
+/* Estilos para cada tarjeta de producto */
+.card {
     background-color: #fff;
     border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: row; 
-    max-width: 1000px; 
-    width: 100%;
-    overflow: hidden;
-    margin: 20px; 
-}
-
-.detail-image-container {
-    flex: 1; 
-    padding: 30px;
-    background-color: #fafafa;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 400px; 
-}
-
-.detail-imagen {
-    max-width: 100%;
-    max-height: 400px; 
-    object-fit: contain;
-    border-radius: 8px; 
-}
-
-.detail-info {
-    flex: 1.2; 
-    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave para destacar */
+    padding: 20px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    width: 280px; /* ANCHO FIJO DE LA TARJETA */
+    min-height: 450px; /* ALTURA MÍNIMA FIJA PARA LA TARJETA COMPLETA */
+    justify-content: space-between; /* Distribuye el espacio entre los elementos de la tarjeta */
+    border: 1px solid #e0e0e0;
+    overflow: hidden; /* Asegura que nada se salga de la tarjeta */
+}
+
+.card:hover {
+    transform: translateY(-8px); /* Pequeño levantamiento más pronunciado */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Sombra más grande al pasar el ratón */
+}
+
+/* Estilos para el Link que envuelve la imagen */
+.image-link {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 15px; /* Espacio debajo de la imagen */
+}
+
+/* Contenedor de la imagen dentro de la tarjeta */
+.imganContainer {
+    width: 100%;
+    height: 180px; /* <-- ALTURA FIJA PARA TODAS LAS IMÁGENES */
+    background-color: #f8f8f8;
+    border-radius: 10px; /* Bordes un poco más suaves */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.08); /* Sombra interna para profundidad */
 }
 
-.detail-nombre {
-    font-size: 2.8rem; 
-    font-weight: 800;
+/* La imagen en sí */
+.imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* <-- LA IMAGEN CUBRE EL ESPACIO, CORTANDO SI ES NECESARIO */
+    display: block;
+}
+
+/* Sección de información de texto */
+.info-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex-grow: 1; /* Permite que esta sección ocupe el espacio disponible */
+    justify-content: flex-start; /* Alinea el contenido de texto hacia arriba */
+    width: 100%;
+    margin-bottom: 20px; /* Espacio antes del botón */
+    min-height: 120px; /* <-- ALTURA MÍNIMA PARA EL BLOQUE DE TEXTO */
+}
+
+/* Estilos para el Link que envuelve el título del producto */
+.title-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Título del producto */
+.nombre {
+    font-size: 20px;
+    font-weight: 700;
     color: #2c3e50;
-    margin-bottom: 15px;
-    line-height: 1.2;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limita el título a 2 líneas */
+    -webkit-box-orient: vertical;
+    min-height: calc(2 * 1.3em); /* Asegura altura para 2 líneas */
+    margin-bottom: 8px; /* Un poco de margen para separar del precio */
 }
 
-.detail-precio {
-    font-size: 2.2rem;
-    font-weight: 900;
+/* Precio del producto */
+.precio {
+    font-size: 19px; /* Ligeramente más grande */
+    font-weight: 800;
     color: #3498db;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
 }
 
-.detail-descripcion {
-    font-size: 1.15rem;
-    color: #555;
-    line-height: 1.7;
-    margin-bottom: 25px;
-}
-
-.detail-stock {
-    font-size: 1rem;
+/* Stock del producto */
+.stock {
+    font-size: 14px;
     color: #7f8c8d;
-    margin-bottom: 20px;
+    margin-bottom: 0;
 }
 
-.detail-add-to-cart-button {
+/* Botón de añadir al carrito */
+.addToCartButton {
     background-color: #28a745;
     color: white;
-    padding: 15px 30px;
+    padding: 12px 25px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 16px;
     font-weight: 700;
     transition: background-color 0.3s ease, transform 0.1s ease;
-    align-self: flex-start; 
-    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.2);
+    width: 100%;
+    margin-top: auto; /* Empuja el botón hacia la parte inferior */
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3); /* Sombra para el botón */
 }
 
-.detail-add-to-cart-button:hover:not(:disabled) {
+.addToCartButton:hover:not(:disabled) {
     background-color: #218838;
     transform: translateY(-3px);
 }
 
-.detail-add-to-cart-button:disabled {
+.addToCartButton:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
     color: #666666;
-}
-
-/* Media Queries para pantallas más pequeñas */
-@media (max-width: 768px) {
-    .product-detail-card {
-        flex-direction: column; 
-        margin: 10px;
-    }
-
-    .detail-image-container {
-        min-width: unset; 
-        padding: 20px;
-    }
-
-    .detail-nombre {
-        font-size: 2rem;
-    }
-
-    .detail-precio {
-        font-size: 1.8rem;
-    }
-
-    .detail-add-to-cart-button {
-        width: 100%; 
-        align-self: stretch;
-    }
+    box-shadow: none;
 }
