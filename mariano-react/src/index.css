@@ -1,12 +1,8 @@
-/* src/App.css */
 
-/* ¡IMPORTANTE! Las directivas de Tailwind CSS deben ir primero */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Fuente Inter - Siempre usa @import si es una URL externa */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 body {
   font-family: 'Inter', sans-serif;
@@ -18,7 +14,7 @@ body {
   background-color: #f8faff; /* Un fondo muy ligero para la página */
 }
 
-/* Para asegurar que el contenedor principal de la app ocupe el 100% de la altura de la ventana */
+
 #root, html, body {
   height: 100%;
 }

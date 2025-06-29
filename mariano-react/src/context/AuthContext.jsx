@@ -1,64 +1,97 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CartContext } from './CartContext';
+import { toast } from 'react-toastify';
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
-  const navigate = useNavigate();
-  const { setIsAuth } = useContext(CartContext);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => localStorage.getItem('isAuth') === 'true');
+  const [userRole, setUserRole] = useState(() => localStorage.getItem('userRole') || null);
+  const [users, setUsers] = useState([]);
+  const [cargandoUsers, setCargandoUsers] = useState(true);
+  const [errorUsers, setErrorUsers] = useState(null);
 
   useEffect(() => {
-    const isAuthenticated = localStorage.getItem('isAuth') === 'true';
-    if (isAuthenticated) {
-      setIsAuth(true);
-      navigate('/admin');
-    }
-  }, [navigate, setIsAuth]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const validationErrors = {};
-    if (!email) validationErrors.email = 'Email es requerido';
-    if (!password) validationErrors.password = 'Password es requerido';
-
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-
-    try {
-      // Asumiendo que tienes un archivo local 'data/users.json' con usuarios
-      const res = await fetch('/data/users.json');
-      if (!res.ok) throw new Error('Error al cargar usuarios');
-      const users = await res.json();
-
-      const foundUser = users.find(
-        (user) => user.email === email && user.password === password
-      );
-
-      if (!foundUser) {
-        setErrors({ email: 'Credenciales inválidas' });
-      } else {
-        if (foundUser.role === 'admin') {
-          setIsAuth(true);
-          localStorage.setItem('isAuth', 'true');
-          navigate('/admin');
-        } else {
-          navigate('/');
+    const fetchUsers = async () => {
+      try {
+        setCargandoUsers(true);
+        const res = await fetch('/data/users.json');
+        if (!res.ok) {
+          throw new Error(`Error HTTP al cargar usuarios desde local: ${res.status}`);
         }
+        const data = await res.json();
+        setUsers(data);
+      } catch (err) {
+        console.error('Error al cargar usuarios desde users.json:', err);
+        setErrorUsers(err);
+        toast.error('Error al cargar la base de datos de usuarios local.');
+      } finally {
+        setCargandoUsers(false);
       }
-    } catch (err) {
-      console.error('Error fetching users:', err);
-      setErrors({ email: 'Algo salió mal. Por favor, inténtalo de nuevo más tarde.' });
+    };
+    fetchUsers();
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('isAuth', isAuthenticated ? 'true' : 'false');
+    localStorage.setItem('userRole', userRole || '');
+    if (isAuthenticated) {
+      if (navigate && window.location.pathname === '/login') {
+         navigate(userRole === 'admin' ? '/admin' : '/');
+      }
+    }
+  }, [isAuthenticated, userRole, navigate]);
+
+  const loginUser = (email, password) => {
+    setErrors({});
+    const foundUser = users.find(
+      (user) => user.email === email && user.password === password
+    );
+
+    if (foundUser) {
+      setIsAuthenticated(true);
+      setUserRole(foundUser.role);
+      toast.success(`Bienvenido, ${foundUser.email}!`);
+      return true;
+    } else {
+      setIsAuthenticated(false);
+      setUserRole(null);
+      setErrors({ email: 'Credenciales inválidas. Verifica tu correo y contraseña.' });
+      toast.error('Credenciales incorrectas.');
+      return false;
     }
   };
 
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setUserRole(null);
+    localStorage.removeItem('isAuth');
+    localStorage.removeItem('userRole');
+    toast.info('Sesión cerrada.');
+    navigate('/');
+  };
+
   return (
-    <AuthContext.Provider value={{ email, setEmail, password, setPassword, handleSubmit, errors }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        userRole,
+        loginUser,
+        handleLogout,
+        email,
+        setEmail,
+        password,
+        setPassword,
+        errors,
+        cargandoUsers,
+        errorUsers,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -1,11 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Fuente Inter */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-/* src/App.css */
+@import 'bootstrap/dist/css/bootstrap.min.css';
 
 body {
   font-family: 'Inter', sans-serif;

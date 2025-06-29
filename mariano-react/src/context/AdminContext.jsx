@@ -1,41 +1,47 @@
 import { createContext, useEffect, useState } from "react";
-import Swal from "sweetalert2";
+import Swal from "sweetalert2"; 
 
 export const AdminContext = createContext();
 
 export const AdminProvider = ({ children }) => {
   const [productos, setProductos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [open, setOpen] = useState(false);
-  const [seleccionado, setSeleccionado] = useState(null);
-  const [openEditor, setOpenEditor] = useState(false);
-  const apiUrl = "https://68588753138a18086dfb2a51.mockapi.io/product";
+  const [cargando, setCargando] = useState(true); // Renombrado de 'loading' a 'cargando' para consistencia
+  const [open, setOpen] = useState(false); // Para controlar el modal de agregar
+  const [seleccionado, setSeleccionado] = useState(null); // Producto seleccionado para edición
+  const [openEditor, setOpenEditor] = useState(false); // Para controlar el modal de edición
 
-  useEffect(() => {
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        setTimeout(() => {
-          setProductos(data);
-          setLoading(false);
-        }, 2000);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setLoading(false);
-      });
-  }, []);
+  
+  const apiUrl = "https://68588753138a18086dfb2a51.mockapi.io/product"; 
 
+  // Función para cargar/recargar los productos desde la API
   const cargarProductos = async () => {
     try {
+      setCargando(true); // Inicia el estado de carga
       const res = await fetch(apiUrl);
+      if (!res.ok) {
+        throw new Error(`Error HTTP: ${res.status} al cargar productos`);
+      }
       const data = await res.json();
       setProductos(data);
     } catch (error) {
-      console.log("Error al cargar productos ", error);
+      console.error("Error al cargar productos en AdminContext:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error de carga",
+        text: "Hubo un problema al cargar los productos. Inténtalo de nuevo.",
+      });
+    } finally {
+      setCargando(false); // Finaliza el estado de carga
     }
   };
 
+  // useEffect para la carga inicial de productos
+  useEffect(() => {
+    cargarProductos();
+    // El setTimeout original era para simular carga, no es necesario con el patrón async/await y cargando.
+  }, []);
+
+  // Función para agregar un nuevo producto
   const agregarProducto = async (producto) => {
     try {
       const respuesta = await fetch(apiUrl, {
@@ -46,22 +52,30 @@ export const AdminProvider = ({ children }) => {
         body: JSON.stringify(producto),
       });
       if (!respuesta.ok) {
-        throw new Error("Error al agregar producto");
+        throw new Error("Error al agregar el producto");
       }
-      await respuesta.json();
+      await respuesta.json(); // Consumir la respuesta JSON
       Swal.fire({
-        title: ":)!",
-        text: "Producto agregado correctamente!",
+        title: "¡Éxito!",
+        text: "Producto agregado correctamente.",
         icon: "success",
+        timer: 2000, // Se cierra automáticamente en 2 segundos
+        showConfirmButton: false
       });
-      cargarProductos();
-      setOpen(false);
+      cargarProductos(); // Recargar la lista de productos
+      setOpen(false); // Cerrar el modal de agregar
     } catch (error) {
-      console.log(error.message);
+      console.error("Error al agregar producto:", error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: `No se pudo agregar el producto: ${error.message}`,
+      });
     }
   };
 
-  const actulizarProducto = async (producto) => {
+  // Función para actualizar un producto existente
+  const actualizarProducto = async (producto) => { // Corregido de 'actulizarProducto'
     try {
       const respuesta = await fetch(`${apiUrl}/${producto.id}`, {
         method: "PUT",
@@ -70,33 +84,67 @@ export const AdminProvider = ({ children }) => {
         },
         body: JSON.stringify(producto),
       });
-      if (!respuesta.ok) throw Error("Error al actualizar el producto");
+      if (!respuesta.ok) {
+        throw new Error("Error al actualizar el producto");
+      }
       await respuesta.json();
-      alert("Producto actualizado correctamente");
-      setOpenEditor(false);
-      setSeleccionado(null);
-      cargarProductos();
+      Swal.fire({
+        title: "¡Actualizado!",
+        text: "Producto actualizado correctamente.",
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false
+      });
+      setOpenEditor(false); // Cerrar el modal de edición
+      setSeleccionado(null); // Limpiar el producto seleccionado
+      cargarProductos(); // Recargar la lista
     } catch (error) {
-      console.log(error.message);
+      console.error("Error al actualizar producto:", error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: `No se pudo actualizar el producto: ${error.message}`,
+      });
     }
   };
 
+  // Función para eliminar un producto
   const eliminarProducto = async (id) => {
-    const confirmar = window.confirm("¿Estás seguro de eliminar el producto?");
-    if (confirmar) {
+    // Usamos Swal.fire para la confirmación en lugar de window.confirm
+    const result = await Swal.fire({
+      title: "¿Estás seguro?",
+      text: "¡No podrás revertir esto!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#dc3545", // Color rojo de Bootstrap para peligro
+      cancelButtonColor: "#6c757d", // Color gris de Bootstrap para secundario
+      confirmButtonText: "Sí, eliminarlo",
+      cancelButtonText: "Cancelar"
+    });
+
+    if (result.isConfirmed) { // Si el usuario confirma
       try {
         const respuesta = await fetch(`${apiUrl}/${id}`, {
           method: "DELETE",
         });
-        if (!respuesta.ok) throw Error("Error al eliminar");
+        if (!respuesta.ok) {
+          throw new Error("Error al eliminar el producto");
+        }
         Swal.fire({
-          title: ":(!",
-          text: "Producto eliminado correctamente!",
-          icon: "error",
+          title: "¡Eliminado!",
+          text: "El producto ha sido eliminado correctamente.",
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false
         });
-        cargarProductos();
+        cargarProductos(); // Recargar la lista
       } catch (error) {
-        alert("Hubo un problema al eliminar el producto");
+        console.error("Error al eliminar producto:", error.message);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: `Hubo un problema al eliminar el producto: ${error.message}`,
+        });
       }
     }
   };
@@ -105,7 +153,7 @@ export const AdminProvider = ({ children }) => {
     <AdminContext.Provider
       value={{
         productos,
-        loading,
+        cargando, // Exportamos el estado 'cargando'
         open,
         setOpen,
         openEditor,
@@ -113,8 +161,9 @@ export const AdminProvider = ({ children }) => {
         seleccionado,
         setSeleccionado,
         agregarProducto,
-        actulizarProducto,
+        actualizarProducto, // Exportamos el nombre corregido
         eliminarProducto,
+        cargarProductos, // Opcional: exportar para recargas manuales si fuera necesario en Admin.jsx
       }}
     >
       {children}

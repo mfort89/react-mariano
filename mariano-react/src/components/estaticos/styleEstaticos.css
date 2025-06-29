@@ -1,108 +1,46 @@
+/* estaticos.css */
 
-/* --- Estilos Generales del Encabezado (Header) --- */
+/* General */
+body, html, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Asegurar que el contenedor principal ocupe espacio para que footer quede al final */
+#root > div {
+  flex: 1;
+}
+
+/* Header específico */
 header {
-    background-color: #2c3e50; 
-    padding: 1rem 0; 
-    color: white; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  /* bg-primary ya definido en Bootstrap */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* --- Contenedor de Navegación (nav) --- */
-/* Si tu nav necesita un ancho máximo o centrarse, puedes añadir: */
-nav {
-    max-width: 1200px; 
-    margin: 0 auto; 
-    padding: 0 1rem; 
+/* Navbar links hover personalizado */
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 0.375rem;
+  color: white !important; /* El !important es para asegurar que anule los estilos de Bootstrap */
+  transition: background-color 0.3s ease;
 }
 
-/* --- Lista de Navegación (ul) --- */
-nav ul {
-    list-style: none; 
-    padding: 0;
-    display: flex; 
-    flex-wrap: wrap; 
-    justify-content: space-between; 
-    align-items: center; 
+/* Cart button hover */
+.btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white !important; /* También usa !important aquí */
 }
 
-/* --- Elementos de la Lista (li) --- */
-nav ul li {
-    position: relative; 
+/* Badge cart */
+.badge.bg-danger {
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
 }
 
-
-.link {
-    color: white; 
-    text-decoration: none; 
-    padding: 0.8rem 1.2rem; 
-    display: block; 
-    transition: background-color 0.3s ease, color 0.3s ease; 
-    border-radius: 5px; 
-    font-weight: 500; 
-}
-
-.link:hover {
-    background-color: rgba(255, 255, 255, 0.1); 
-    color: #e0f2f7; 
-}
-
-/* --- Estilos del Botón del Carrito (.btnCart) --- */
-.cartnav {
-    display: flex; 
-    align-items: center;
-}
-
-.btnCart {
-    background: none; 
-    border: none; 
-    color: white; 
-    font-size: 1.8rem; 
-    cursor: pointer;
-    padding: 0.5rem;
-    position: relative; 
-    transition: color 0.3s ease;
-}
-
-.btnCart:hover {
-    color: #a7d9f2;
-}
-
-/* --- Contador de Ítems del Carrito (.cart-item-count) --- */
-.cart-item-count {
-    background-color: #e74c3c; 
-    color: white;
-    border-radius: 50%; 
-    padding: 2px 6px; 
-    font-size: 0.75rem; 
-    position: absolute; 
-    top: -5px; 
-    right: -5px; 
-    line-height: 1; 
-    min-width: 18px; 
-    text-align: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); 
-}
-
-/* --- Estilos para Botones de Login/Admin/Logout (para diferenciarlos si se desea) --- */
-.btnLogin .link,
-.btnAdmin .link,
-.btnLogout .link button { 
-    background-color: #3498db; 
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border-radius: 5px;
-    border: none; 
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btnLogin .link:hover,
-.btnAdmin .link:hover,
-.btnLogout .link button:hover {
-    background-color: #2980b9;
-}
-
-/* Estilo para los iconos de Font Awesome */
-.fa-solid {
-    margin-right: 5px; 
+/* Footer */
+footer {
+  /* bg-primary and text-light from Bootstrap */
+  font-weight: 400;
 }
