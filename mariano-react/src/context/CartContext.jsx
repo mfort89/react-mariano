@@ -1,154 +1,116 @@
-// src/context/CartContext.js
-import { createContext, useState, useEffect } from "react";
+import { createContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-    const [cart, setCart] = useState(() => {
-        const savedCart = localStorage.getItem('cart');
-        return savedCart ? JSON.parse(savedCart) : [];
-    });
-    const [productos, setProductos] = useState([]);
-    const [cargando, setCargando] = useState(true);
-    const [error, setError] = useState(null);
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
 
-    const [isAuthenticated, setIsAuthenticated] = useState(() => {
-        const savedAuth = localStorage.getItem('isAuthenticated');
-        return savedAuth === 'true';
-    });
-    const [userRole, setUserRole] = useState(() => {
-        return localStorage.getItem('userRole') || null;
-    });
+  const [productos, setProductos] = useState([]);
+  const [cargando, setCargando] = useState(true);
+  const [error, setError] = useState(false);
+  const [isAuthenticated, setIsAuth] = useState(() => {
+    return localStorage.getItem('isAuth') === 'true';
+  });
+  const [busqueda, setBusqueda] = useState("");
 
-    // Efecto para cargar productos
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await fetch('/data/data.json');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                // Simula un tiempo de carga
-                setTimeout(() => {
-                    setProductos(data);
-                    setCargando(false);
-                }, 1000);
-            } catch (err) {
-                console.error('Error fetching data:', err);
-                setError(err.message);
-                setCargando(false);
-            }
-        };
-        fetchProducts();
-    }, []);
+  useEffect(() => {
+    fetch('https://682e2f0e746f8ca4a47c2dbd.mockapi.io/product')
+      .then(respuesta => respuesta.json())
+      .then(datos => {
+        setTimeout(() => {
+          setProductos(datos);
+          setCargando(false);
+        }, 2000);
+      })
+      .catch(error => {
+        console.log('Error', error);
+        setCargando(false);
+        setError(true);
+      });
+  }, []);
 
-    // Efecto para persistir el carrito en localStorage
-    useEffect(() => {
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }, [cart]);
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
-    // Efecto para persistir la autenticación y el rol
-    useEffect(() => {
-        localStorage.setItem('isAuthenticated', isAuthenticated);
-        localStorage.setItem('userRole', userRole || '');
-    }, [isAuthenticated, userRole]);
+  useEffect(() => {
+    localStorage.setItem('isAuth', isAuthenticated ? 'true' : 'false');
+  }, [isAuthenticated]);
 
-    // Función para agregar un producto al carrito o incrementar su cantidad
-    const agregarCarrito = (productToAdd) => { 
-        setCart(prevCart => {
-            const productInCart = prevCart.find((item) => item.id === productToAdd.id);
-            if (productInCart) {
-                return prevCart.map((item) =>
-                    item.id === productToAdd.id
-                        ? { ...item, quantity: item.quantity + productToAdd.quantity }
-                        : item
-                );
+  const productosFiltrados = productos.filter((producto) =>
+    producto?.nombre.toLowerCase().includes(busqueda.toLowerCase())
+  );
+
+  const handleAddToCart = (product) => {
+    const productInCart = cart.find((item) => item.id === product.id);
+    if (productInCart) {
+      setCart(
+        cart.map((item) =>
+          item.id === product.id ? { ...item, cantidad: product.cantidad } : item
+        )
+      );
+    } else {
+      toast.success(`El producto ${product.nombre} se ha agregado al carrito`);
+      setCart([...cart, { ...product, cantidad: product.cantidad }]);
+    }
+  };
+
+  const handleDeleteFromCart = (product) => {
+    setCart((prevCart) => {
+      let isRemoved = false;
+      const newCart = prevCart
+        .map((item) => {
+          if (item.id === product.id) {
+            if (item.cantidad > 1) {
+              return { ...item, cantidad: item.cantidad - 1 };
             } else {
-                return [...prevCart, { ...productToAdd, quantity: productToAdd.quantity }];
+              isRemoved = true;
+              return null;
             }
-        });
-    };
+          } else {
+            return item;
+          }
+        })
+        .filter(Boolean);
 
-    // Función para decrementar cantidad de un producto
-    const decrementarCantidad = (productId) => { // Renombrado a decrementarCantidad
-        setCart(prevCart => {
-            const updatedCart = prevCart.map(item => {
-                if (item.id === productId) {
-                    return { ...item, quantity: item.quantity - 1 };
-                }
-                return item;
-            });
-            return updatedCart.filter(item => item.quantity > 0); // Elimina si la cantidad llega a 0
-        });
-    };
+      if (isRemoved) {
+        toast.error(`El producto ${product.nombre} se ha eliminado completamente del carrito`);
+      } else {
+        toast.info(`Se ha reducido la cantidad de ${product.nombre}`);
+      }
 
-    // Función para eliminar un producto completamente del carrito
-    const eliminarProducto = (productId) => {
-        setCart(prevCart => prevCart.filter(item => item.id !== productId));
-    };
+      return newCart;
+    });
+  };
 
-    // Función para vaciar completamente el carrito
-    const vaciarCarrito = () => {
-        setCart([]);
-    };
+  const clearCart = () => {
+    setCart([]);
+    localStorage.removeItem("cart");
+    toast.info('Compra finalizada!');
+  };
 
-    // Funciones para la autenticación
-    const handleLogin = (email, password) => {
-        return fetch('/data/users.json')
-            .then(response => response.json())
-            .then(users => {
-                const foundUser = users.find(
-                    (user) => user.email === email && user.password === password
-                );
-
-                if (foundUser) {
-                    setIsAuthenticated(true);
-                    setUserRole(foundUser.role);
-                    return true;
-                } else {
-                    setIsAuthenticated(false);
-                    setUserRole(null);
-                    return false;
-                }
-            })
-            .catch(err => {
-                console.error("Error during login fetch:", err);
-                setIsAuthenticated(false);
-                setUserRole(null);
-                return false;
-            });
-    };
-
-    const handleLogout = () => {
-        setIsAuthenticated(false);
-        setUserRole(null);
-    };
-
-    const handleAddProduct = (newProduct) => {
-        setProductos(prevProducts => [...prevProducts, { ...newProduct, id: Date.now().toString() }]);
-        alert('Producto agregado (solo en el frontend).');
-    };
-
-    return (
-        <CartContext.Provider
-            value={{
-                cart,
-                productos,
-                cargando,
-                error,
-                agregarCarrito,      // Nombre consistente
-                decrementarCantidad, // Nombre consistente
-                eliminarProducto,    // Nombre consistente
-                vaciarCarrito,
-                isAuthenticated,
-                userRole,
-                handleLogin,
-                handleLogout,
-                handleAddProduct
-            }}
-        >
-            {children}
-        </CartContext.Provider>
-    );
+  return (
+    <CartContext.Provider
+      value={{
+        cart,
+        productos,
+        cargando,
+        error,
+        handleAddToCart,
+        handleDeleteFromCart,
+        isAuthenticated,
+        setIsAuth,
+        productosFiltrados,
+        busqueda,
+        setBusqueda,
+        clearCart,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 };

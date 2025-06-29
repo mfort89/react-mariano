@@ -4,7 +4,7 @@
     "nombre": "PlayStation 5 (PS5) Standard Edition",
     "precio": 549.99,
     "stock": 15,
-    "imagen": "https://placehold.co/400x300/1E90FF/FFFFFF?text=PS5+Consola",
+    "imagen": "https://www.cdmarket.com.ar/image/0/600_750-image_(6).png",
     "categoria": "consolas",
     "descripcion": "La consola PlayStation 5 de última generación, con gráficos impresionantes y tiempos de carga ultrarrápidos para una experiencia de juego inmersiva."
   },
@@ -13,7 +13,7 @@
     "nombre": "Xbox Series X",
     "precio": 499.99,
     "stock": 12,
-    "imagen": "https://placehold.co/400x300/32CD32/FFFFFF?text=Xbox+Series+X",
+    "imagen": "https://spacegamer.com.ar/img/Public/1058-producto-seriesx-8229.jpg",
     "categoria": "consolas",
     "descripcion": "La consola más potente de Xbox, diseñada para la velocidad y el rendimiento, con miles de juegos de cuatro generaciones."
   },
@@ -22,7 +22,7 @@
     "nombre": "Nintendo Switch OLED Model",
     "precio": 349.99,
     "stock": 20,
-    "imagen": "https://placehold.co/400x300/FF6347/FFFFFF?text=Switch+OLED",
+    "imagen": "https://www.sagitariodigital.com.ar/wp-content/uploads/2022/03/OLED.jpg",
     "categoria": "consolas",
     "descripcion": "Disfruta de tus juegos favoritos en casa o en movimiento con la pantalla OLED vibrante y el soporte ajustable de Nintendo Switch."
   },
@@ -31,7 +31,7 @@
     "nombre": "Videojuego: Elden Ring (PS5)",
     "precio": 69.99,
     "stock": 30,
-    "imagen": "https://placehold.co/400x300/8A2BE2/FFFFFF?text=Elden+Ring+Game",
+    "imagen": "https://ps4digitalargentina.com/files/images/productos/1639689177-elden-ring-ps5-pre-orden.jpg",
     "categoria": "videojuegos",
     "descripcion": "Un épico juego de rol de acción desarrollado por FromSoftware. Explora un vasto mundo de fantasía lleno de peligros y descubrimientos."
   },
@@ -40,7 +40,7 @@
     "nombre": "Videojuego: The Legend of Zelda: Tears of the Kingdom (Switch)",
     "precio": 59.99,
     "stock": 25,
-    "imagen": "https://placehold.co/400x300/4682B4/FFFFFF?text=Zelda+ToTK",
+    "imagen": "https://bioscomputacion.com.ar/img/Public/1161/27955-producto-d-nq-np-2x-850327-mla54712581525.jpg",
     "categoria": "videojuegos",
     "descripcion": "La aclamada secuela de Breath of the Wild. Vuela sobre Hyrule y explora nuevas tierras en esta aventura épica."
   },
@@ -49,7 +49,7 @@
     "nombre": "Videojuego: Call of Duty: Modern Warfare III (Xbox Series X)",
     "precio": 64.99,
     "stock": 35,
-    "imagen": "https://placehold.co/400x300/B0C4DE/333333?text=CoD+MW3+Game",
+    "imagen": "https://resources.sanborns.com.mx/imagenes-sanborns-ii/1200/47875104853_3.jpg?scale=500&qlty=75e",
     "categoria": "videojuegos",
     "descripcion": "La última entrega de la popular serie Call of Duty, con acción intensa y un modo multijugador renovado."
   },
@@ -58,7 +58,7 @@
     "nombre": "Control DualSense Edge (PS5)",
     "precio": 199.99,
     "stock": 10,
-    "imagen": "https://placehold.co/400x300/FFD700/333333?text=DualSense+Edge",
+    "imagen": "https://nextgames.com.ar/img/Public/1040-producto-edge-1-7545.jpg",
     "categoria": "accesorios",
     "descripcion": "El control inalámbrico de alto rendimiento para PS5, diseñado para la precisión y la personalización."
   },
@@ -67,7 +67,7 @@
     "nombre": "Auriculares Gaming HyperX Cloud Alpha",
     "precio": 99.99,
     "stock": 18,
-    "imagen": "https://placehold.co/400x300/A9A9A9/FFFFFF?text=HyperX+Auric.",
+    "imagen": "https://row.hyperx.com/cdn/shop/products/hyperx_cloud_alpha_blackred_1_main.jpg?v=1662420668",
     "categoria": "accesorios",
     "descripcion": "Auriculares con sonido envolvente y micrófono con cancelación de ruido para una comunicación clara en el juego."
   },
@@ -76,7 +76,7 @@
     "nombre": "Consola Retro NES Classic Edition",
     "precio": 79.99,
     "stock": 8,
-    "imagen": "https://placehold.co/400x300/DC143C/FFFFFF?text=NES+Classic",
+    "imagen": "https://images.fravega.com/f500/2d125ceb1987625882ac704ebf2de8be.jpg",
     "categoria": "consolas-retro",
     "descripcion": "Revive los clásicos con la NES Classic Edition, pre-cargada con 30 juegos icónicos."
   },
@@ -85,7 +85,7 @@
     "nombre": "Videojuego: Cyberpunk 2077 (Xbox One/Series X)",
     "precio": 29.99,
     "stock": 40,
-    "imagen": "https://placehold.co/400x300/FF4500/FFFFFF?text=Cyberpunk+2077",
+    "imagen": "https://store-images.s-microsoft.com/image/apps.3328.63407868131364914.bcaa868c-407e-42c2-baeb-48a3c9f29b54.e6585aad-836b-4bcf-8791-62183af21f04",
     "categoria": "videojuegos",
     "descripcion": "Un RPG de mundo abierto ambientado en Night City, una megalópolis obsesionada con el poder y el lujo."
   },
@@ -94,7 +94,7 @@
     "nombre": "Tarjeta Regalo PlayStation Store ($50)",
     "precio": 50.00,
     "stock": 50,
-    "imagen": "https://placehold.co/400x300/00BFFF/FFFFFF?text=PSN+Card+$50",
+    "imagen": "https://nextgames.com.ar/img/Public/1040-producto-gift-50-usa-25.jpg",
     "categoria": "tarjetas-regalo",
     "descripcion": "Tarjeta de $50 para usar en PlayStation Store y comprar juegos, complementos y más."
   },
@@ -103,16 +103,16 @@
     "nombre": "Control Xbox Elite Series 2",
     "precio": 179.99,
     "stock": 7,
-    "imagen": "https://placehold.co/400x300/2F4F4F/FFFFFF?text=Xbox+Elite+Ctrl",
+    "imagen": "http://i5.walmartimages.com/seo/Microsoft-Xbox-Elite-Series-2-Core-Wireless-Controller-White-Black_a27f07ee-08b8-424f-a3e8-3910d83756b9.4756d4732c9c7c30827d87e71a397eb3.jpeg",
     "categoria": "accesorios",
     "descripcion": "Control profesional para Xbox con componentes intercambiables y gran durabilidad."
   },
   {
     "id": 13,
-    "nombre": "Videojuego: Red Dead Redemption 2 (PS4/PS5)",
+    "nombre": "Videojuego: Red Dead Redemption 2 (PS5)",
     "precio": 39.99,
     "stock": 28,
-    "imagen": "https://placehold.co/400x300/8B4513/FFFFFF?text=RDR2+Game",
+    "imagen": "https://acdn-us.mitiendanube.com/stores/002/596/264/products/ps5-copy171-63a7d5b1f18970a01416824405107968-1024-1024.jpg",
     "categoria": "videojuegos",
     "descripcion": "Una épica historia de honor y lealtad en los últimos días del Salvaje Oeste."
   },
@@ -121,7 +121,7 @@
     "nombre": "Estación de Carga DualSense (PS5)",
     "precio": 29.99,
     "stock": 15,
-    "imagen": "https://placehold.co/400x300/4169E1/FFFFFF?text=Cargador+PS5",
+    "imagen": "https://arsonyb2c.vtexassets.com/arquivos/ids/348073-800-800?v=638745438702370000&width=800&height=800&aspect=true",
     "categoria": "accesorios",
     "descripcion": "Carga dos controles inalámbricos DualSense de forma rápida y sencilla."
   },
@@ -130,7 +130,7 @@
     "nombre": "Videojuego: Animal Crossing: New Horizons (Switch)",
     "precio": 49.99,
     "stock": 22,
-    "imagen": "https://placehold.co/400x300/FFC0CB/333333?text=Animal+Crossing",
+    "imagen": "https://storegames.ar/files/images/productos/1637887885-animal-crossing-new-horizons.jpg",
     "categoria": "videojuegos",
     "descripcion": "Crea tu propio paraíso en una isla desierta en este relajante juego de simulación."
   }

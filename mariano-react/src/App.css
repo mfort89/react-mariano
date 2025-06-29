@@ -1,11 +1,11 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Fuente Inter */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-/* src/App.css */ /* Este comentario se movió aquí, después de las reglas @import */
+/* src/App.css */
 
 body {
   font-family: 'Inter', sans-serif;
@@ -14,15 +14,13 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #f8faff; /* Un fondo muy ligero para la página */
+  background-color: #f8faff;
 }
 
-/* Para asegurar que el contenedor principal de la app ocupe el 100% de la altura de la ventana */
 #root, html, body {
   height: 100%;
 }
 
-/* Animación de fade-in para componentes (ahora global) */
 @keyframes fadeIn {
   from {
     opacity: 0;

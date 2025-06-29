@@ -1,49 +1,22 @@
-import React, { useContext } from "react";
+import React from 'react';
+import Header from '../components/estaticos/Header';
+import Footer from '../components/estaticos/Footer';
+import ProductList from '../components/ProductList';
+import loading from '../assets/loading.gif';
 
-
-// Importación de ProductList
-import ProductList from "../components/ProductList.jsx";
-
-// Importación de CartContext
-import { CartContext } from "../context/CartContext.jsx";
-
-
-import loading from '../assets/loading.gif'; 
-
-
-const GaleriaDeProductos = () => {
-
-  const { productos, cargando, error, agregarCarrito } = useContext(CartContext); // Asegúrate de obtener agregarCarrito si lo necesitas
-
+const GaleriaDeProductos = ({ cart, productos, cargando, agregarCarrito, borrarProducto }) => {
   return (
     <>
-      {/* ¡ELIMINA EL HEADER DE AQUÍ! */}
-      {/* <Header /> */}
-
-      <main className="container mx-auto px-4 py-8"> {/* Contenedor principal de la galería */}
-        <h1 style={{ textAlign: 'center', fontSize: '2.5rem', color: '#333', marginBottom: '30px' }}>
-          Nuestra Galería de Productos
-        </h1>
-
-        {/* Manejo de estados: Cargando, Error, Productos */}
+      <Header borrarProducto={borrarProducto} cartItems={cart} />
+      <main style={{ padding: '2rem', textAlign: 'center' }}>
+        <h1>Galería de productos</h1>
         {cargando ? (
-          <div style={{ textAlign: 'center', marginTop: '50px' }}>
-            <img src={loading} alt='Cargando productos...' style={{ maxWidth: '100px' }} />
-            <p style={{ color: '#555', fontSize: '1.2rem' }}>Cargando productos...</p>
-          </div>
-        ) : error ? (
-          <p style={{ textAlign: 'center', color: 'red', fontSize: '1.2rem', marginTop: '50px' }}>
-            Error al cargar los productos: {error}
-          </p>
+          <img src={loading} alt="Cargando..." />
         ) : (
-          // Asegúrate de pasar las props 'productos' y 'agregarCarrito' a ProductList
-          // tal como lo hiciste en Home.jsx
-          <ProductList productos={productos} agregarCarrito={agregarCarrito} />
+          <ProductList agregarCarrito={agregarCarrito} productos={productos} />
         )}
       </main>
-
-      {/* ¡ELIMINA EL FOOTER DE AQUÍ! */}
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

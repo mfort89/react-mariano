@@ -1,52 +1,53 @@
-// src/components/Productos.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
-// Asegúrate de que esta ruta sea correcta para styleProductos.css
-// Si styleProductos.css está en la misma carpeta que Productos.jsx, esta ruta es correcta.
-import './styleProductos.css'; 
+import React, { useState, useContext, useEffect } from 'react'
+import './styleProductos.css'
+import { Link } from 'react-router-dom'
+import { CartContext } from '../context/CartContext'
 
-const Productos = ({ producto, agregarCarrito }) => {
+const Productos = ({ producto }) => {
+  const { handleAddToCart } = useContext(CartContext)
+  
+  // Inicializamos cantidad en 1 para que siempre haya al menos uno para agregar
+  const [cantidad, setCantidad] = useState(1)
+
+  // Controlamos que la cantidad nunca sea mayor al stock
+  const increase = () => {
+    if (cantidad < producto.stock) {
+      setCantidad(prev => prev + 1)
+    }
+  }
+
+  const decrease = () => {
+    if (cantidad > 1) {
+      setCantidad(prev => prev - 1)
+    }
+  }
+
   return (
-    // Las clases 'card', 'imganContainer', 'imagen', 'info-section', 'nombre', etc.,
-    // son definidas en 'src/components/styleProductos.css'
-    <div className="card">
-      {/* Link que envuelve la imagen para ir a la página de detalles del producto */}
-      <Link to={`/productos/${producto.id}`} className="image-link">
-        <div className="imganContainer">
-          <img
-            src={producto.imagen}
-            alt={producto.nombre}
-            className="imagen"
-            onError={(e) => {
-              e.target.onerror = null;
-              // [Image of Placeholder product image]
-              e.target.src = `https://placehold.co/400x300/E0E0E0/333333?text=Producto`;
-            }}
-          />
-        </div>
-      </Link>
-
-      {/* Sección de información del producto */}
-      <div className="info-section">
-        {/* Link que envuelve el nombre para ir a la página de detalles */}
-        <Link to={`/productos/${producto.id}`} className="title-link">
-          <h3 className="nombre">{producto.nombre}</h3>
-        </Link>
-        
-        <p className="precio">${producto.precio.toFixed(2)}</p>
-        <p className="stock">Stock disponible: {producto.stock}</p>
+    <section className='card'>
+      <div className='imganContainer'>
+        <img src={producto.imagen} alt={producto.nombre} className='imagen' />
       </div>
-      
-      {/* Botón para agregar al carrito */}
-      <button 
-        onClick={() => agregarCarrito({ ...producto, quantity: 1 })} 
-        className="addToCartButton"
-        disabled={producto.stock === 0} // Deshabilita el botón si no hay stock
-      >
-        {producto.stock === 0 ? 'Sin Stock' : 'Agregar al Carrito'}
-      </button>
-    </div>
-  );
-};
 
-export default Productos;
+      <h3 className='nombre'>{producto.nombre}</h3>
+      <p className='precio'>${producto.precio}</p>
+      <p className='stock'>Stock: {producto.stock}</p>
+
+      <div className='cantidadContainer'>
+        <button className='qtyButton' onClick={decrease}>-</button>
+        <span>{cantidad}</span>
+        <button className='qtyButton' onClick={increase}>+</button>
+      </div>
+
+      <button
+        onClick={() => handleAddToCart({ ...producto, cantidad })}
+        disabled={producto.stock === 0}
+      >
+        Agregar al carrito
+      </button>
+
+      <Link to={`/productos/${producto.id}`}>Ver más</Link>
+    </section>
+  )
+}
+
+export default Productos
